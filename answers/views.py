@@ -172,12 +172,12 @@ def signup(request):
     return render(request, "answers/signup.html", context)
 
 def leaderboard(request):
-    r1_results = Result.objects.filter(this_round__round_number=1).order_by('score')
-    r2_results = Result.objects.filter(this_round__round_number=2).order_by('score')
-    r3_results = Result.objects.filter(this_round__round_number=3).order_by('score')
-    r4_results = Result.objects.filter(this_round__round_number=4).order_by('score')
-    r5_results = Result.objects.filter(this_round__round_number=5).order_by('score')
-    r6_results = Result.objects.filter(this_round__round_number=6).order_by('score')
+    r1_results = Result.objects.filter(this_round__round_number=1).order_by('-score')
+    r2_results = Result.objects.filter(this_round__round_number=2).order_by('-score')
+    r3_results = Result.objects.filter(this_round__round_number=3).order_by('-score')
+    r4_results = Result.objects.filter(this_round__round_number=4).order_by('-score')
+    r5_results = Result.objects.filter(this_round__round_number=5).order_by('-score')
+    r6_results = Result.objects.filter(this_round__round_number=6).order_by('-score')
     context = {
         'r1_results': r1_results,
         'r2_results': r2_results,
