@@ -82,6 +82,6 @@ class Result(models.Model):
     question_18 = models.CharField(max_length=500, blank=True)
     question_19 = models.CharField(max_length=500, blank=True)
     question_20 = models.CharField(max_length=500, blank=True)
-    log = models.CharField(max_length=2000, blank=True)            
+    log = models.TextField(max_length=2000, blank=True)            
     def __str__(self):
         return str(self.submitted) + ' ' + str(self.this_round) + ' ' + str(self.this_team)

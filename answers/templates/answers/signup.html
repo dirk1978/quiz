@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <form action="{% url 'signup' %}" method="POST">
   <fieldset>
     <div>
       {{ signup_form.as_p }}
       {% csrf_token %}
-      <div class="g-recaptcha" data-sitekey="6LeBlekUAAAAADUELexncsPZ3E9eertw8ZqH-na2"></div>
       <button type="submit" class="btn btn-primary mb-2">Submit</button>  
     </div>
   </fieldset>
