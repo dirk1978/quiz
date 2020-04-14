@@ -70,7 +70,7 @@ def index(request):
                 if obj.score == None: obj.score = 0
                 obj.score += obj.this_round.score_20
             obj.save()
-            return HttpResponseRedirect('/quiz/thanks/')
+            return HttpResponseRedirect('thanks/')
     result_form = ResultForm()
     context = {
         'result_form': result_form
@@ -82,15 +82,34 @@ def signup(request):
         form = TeamForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/quiz/signupthanks/')
+            return HttpResponseRedirect('signupthanks/')
     signup_form = TeamForm()
     context = {
         'signup_form': signup_form
     }
     return render(request, "answers/signup.html", context)
 
+def leaderboard(request):
+    r1_results = Result.objects.filter(this_round__round_number=1).order_by('score')
+    r2_results = Result.objects.filter(this_round__round_number=2).order_by('score')
+    r3_results = Result.objects.filter(this_round__round_number=3).order_by('score')
+    r4_results = Result.objects.filter(this_round__round_number=4).order_by('score')
+    r5_results = Result.objects.filter(this_round__round_number=5).order_by('score')
+    r6_results = Result.objects.filter(this_round__round_number=6).order_by('score')
+    context = {
+        'r1_results': r1_results,
+        'r2_results': r2_results,
+        'r3_results': r3_results,
+        'r4_results': r4_results,
+        'r5_results': r5_results,
+        'r6_results': r6_results,
+    }
+    return render(request, "answers/leaderboard.html", context)
+
 def signupthanks(request):
-    return render(request, "answers/signupthanks.html")
+    message = "You are now signed up"
+    return render(request, "answers/thanks.html")
 
 def thanks(request):
+    message = "Your answers have been submitted. Follow the link at the top of the page to submit more"
     return render(request, "answers/thanks.html")
