@@ -54,6 +54,7 @@ class Team(models.Model):
     person_3_name = models.CharField(max_length=100, blank=True)
     person_4_name = models.CharField(max_length=100, blank=True)
     person_5_name = models.CharField(max_length=100, blank=True)
+    team_email = models.EmailField(default='darren.mansell@gmail.com')
     def __str__(self):
         return self.team_name
 

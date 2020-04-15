@@ -1,16 +1,22 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.core.mail import send_mail
 from .models import Team, Round, Result
 from .forms import ResultForm, TeamForm
+from quiz import settings
 from fuzzywuzzy import fuzz, process
 
 def markertron4000(question, answer, score, round_score, log):
-    if fuzz.ratio(question, answer) > 80 or answer.lower() in question.lower():
-        score += round_score
-        log = log + question + ' in ' + answer + '. Adding ' + str(round_score) + '\n'
-    elif question.lower() in answer.lower() and len(question) > 5:
-        score += round_score
-        log = log + question + ' in ' + answer + '. Adding ' + str(round_score) + '\n'
+    if len(answer) > 0:
+        if fuzz.ratio(question.lower(), answer.lower()) > 75 or answer.lower() in question.lower():
+            score += round_score
+            log = log + question + ' matches ' + answer + '. Adding ' + str(round_score) + '\n'
+        elif question.lower() in answer.lower() and len(question) > 5:
+            score += round_score
+            log = log + question + ' matches ' + answer + '. Adding ' + str(round_score) + '\n'
+        else:
+            log = log + question + ' does not match ' + answer + '\n'
     return score, log
+
 
 # Create your views here.
 def index(request):
@@ -41,6 +47,16 @@ def index(request):
             (obj.score, log) = markertron4000(obj.question_20, obj.this_round.answer_20, obj.score, obj.this_round.score_20, log)
             obj.log = log
             obj.save()
+            if obj.this_team.team_email:
+                message = "Here are your results for round %s : %s\nYour team name is %s\n\nAnswers:\n%s" \
+                    % (obj.this_round.round_number, obj.this_round.round_name, obj.this_team.team_name, obj.log)
+                send_mail(
+                    "Quiz Results for Team: %s Round: %s" % (obj.this_team.team_name, obj.this_round.round_name),
+                    message,
+                    settings.EMAIL_FROM_ADDRESS,
+                    [obj.this_team.team_email],
+                    fail_silently=True
+                )
             return HttpResponseRedirect('thanks/')
     result_form = ResultForm()
     context = {
