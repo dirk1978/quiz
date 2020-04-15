@@ -48,8 +48,8 @@ def index(request):
             obj.log = log
             obj.save()
             if obj.this_team.team_email:
-                message = "Here are your results for round %s : %s\nYour team name is %s\n\nAnswers:\n%s" \
-                    % (obj.this_round.round_number, obj.this_round.round_name, obj.this_team.team_name, obj.log)
+                message = "Here are your results for round %s : %s\nYour team name is %s\nScore: %s\n\nAnswers:\n%s" \
+                    % (obj.this_round.round_number, obj.this_round.round_name, obj.this_team.team_name, obj.score, obj.log)
                 send_mail(
                     "Quiz Results for Team: %s Round: %s" % (obj.this_team.team_name, obj.this_round.round_name),
                     message,
