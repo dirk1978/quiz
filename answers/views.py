@@ -7,10 +7,9 @@ def markertron4000(question, answer, score, round_score, log):
     if fuzz.ratio(question, answer) > 80 or answer.lower() in question.lower():
         score += round_score
         log = log + question + ' in ' + answer + '. Adding ' + str(round_score) + '\n'
-    elif question.lower() in answer.lower():
-        if len(question) > 5:
-            score += round_score
-            log = log + question + ' in ' + answer + '. Adding ' + str(round_score) + '\n'
+    elif question.lower() in answer.lower() and len(question) > 5:
+        score += round_score
+        log = log + question + ' in ' + answer + '. Adding ' + str(round_score) + '\n'
     return score, log
 
 # Create your views here.
