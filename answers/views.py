@@ -68,7 +68,16 @@ def signup(request):
     if request.method == 'POST':
         form = TeamForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save()
+            if obj.team_email:
+                message = "You are now registered for the quiz. Your team name is %s" % obj.team_name
+                send_mail(
+                    "Quiz Registration",
+                    message,
+                    settings.EMAIL_FROM_ADDRESS,
+                    [obj.team_email],
+                    fail_silently=True
+                )
             return HttpResponseRedirect('../signupthanks/')
     signup_form = TeamForm()
     context = {
