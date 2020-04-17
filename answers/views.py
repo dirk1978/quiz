@@ -10,7 +10,7 @@ def markertron4000(question, answer, score, round_score, log):
         if fuzz.ratio(question.lower(), answer.lower()) > 75 or answer.lower() in question.lower():
             score += round_score
             log = log + question + ' matches ' + answer + '. Adding ' + str(round_score) + '\n'
-        elif question.lower() in answer.lower() and len(question) > 5:
+        elif question.lower() in answer.lower() and len(question) > 1:
             score += round_score
             log = log + question + ' matches ' + answer + '. Adding ' + str(round_score) + '\n'
         else:
@@ -102,6 +102,12 @@ def leaderboard(request):
     r4_results = Result.objects.filter(this_round__round_number=4).order_by('-score')
     r5_results = Result.objects.filter(this_round__round_number=5).order_by('-score')
     r6_results = Result.objects.filter(this_round__round_number=6).order_by('-score')
+    totals = []
+    for team in Team.objects.all():
+        total_score = 0.0
+        for result in Result.objects.filter(this_team__team_name=team):
+            total_score += result.score
+        totals.append([team.team_name, total_score])
     context = {
         'r1_results': r1_results,
         'r2_results': r2_results,
@@ -109,6 +115,7 @@ def leaderboard(request):
         'r4_results': r4_results,
         'r5_results': r5_results,
         'r6_results': r6_results,
+        'totals': totals
     }
     return render(request, "answers/leaderboard.html", context)
 

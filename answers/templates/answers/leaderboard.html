@@ -3,6 +3,18 @@
 {% block content %}
 
 <div>
+  <h2>Final Totals</h2>
+  <table class="table table-dark">
+    <tr><th>Team Name</th><th>Score</th></tr>
+    {% for line in totals %}<tr>
+    {% for element in line %}<td>{{ element }}</td>
+    {% endfor %}</tr>
+    {% endfor %}
+  </table>
+  </div>
+
+
+<div>
 <h2>Round 1</h2>
 <table class="table table-dark">
   <tr><th>Team Name</th><th>Score</th></tr>
