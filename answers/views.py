@@ -17,6 +17,16 @@ def markertron4000(question, answer, score, round_score, log):
             log = log + question + ' does not match ' + answer + '\n'
     return score, log
 
+def send_bingo_links(request):
+    for team in Team.objects.all():
+        send_mail(
+                "Quiz Bingo Card Link",
+                "Hello %s, please use this link for the bingo card for the quiz:\n\n%s" % (team.team_name, team.bingo_link),
+                settings.EMAIL_FROM_ADDRESS,
+                [team.team_email],
+                fail_silently=True
+            )
+    return HttpResponseRedirect('/')
 
 # Create your views here.
 def index(request):

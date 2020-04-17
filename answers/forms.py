@@ -9,4 +9,4 @@ class ResultForm(ModelForm):
 class TeamForm(ModelForm):
     class Meta:
         model = Team
-        fields = '__all__'
+        exclude = ['bingo_link']
