@@ -46,6 +46,8 @@ class Round(models.Model):
     score_20 = models.FloatField(default=0.0)                                                         
     def __str__(self):
         return self.round_name
+    class Meta:
+        ordering = ['round_number']
 
 class Team(models.Model):
     team_name = models.CharField(max_length=500)
