@@ -80,4 +80,15 @@
 </table>
 </div>
 
+<div>
+  <h2>Round 7</h2>
+  <table class="table table-dark">
+    <tr><th>Team Name</th><th>Score</th></tr>
+    {% for result in r7_results %}
+    <tr><td>{{ result.this_team }} </td>
+    <td>{{ result.score }} </td></tr>
+    {% endfor %}
+  </table>
+  </div>
+
 {% endblock %}

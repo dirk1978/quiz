@@ -102,6 +102,7 @@ def leaderboard(request):
     r4_results = Result.objects.filter(this_round__round_number=4).order_by('-score')
     r5_results = Result.objects.filter(this_round__round_number=5).order_by('-score')
     r6_results = Result.objects.filter(this_round__round_number=6).order_by('-score')
+    r7_results = Result.objects.filter(this_round__round_number=7).order_by('-score')
     totals = []
     for team in Team.objects.all():
         total_score = 0.0
@@ -115,6 +116,7 @@ def leaderboard(request):
         'r4_results': r4_results,
         'r5_results': r5_results,
         'r6_results': r6_results,
+        'r7_results': r7_results,
         'totals': totals
     }
     return render(request, "answers/leaderboard.html", context)
