@@ -55,6 +55,11 @@ def index(request):
             (obj.score, log) = markertron4000(obj.question_18, obj.this_round.answer_18, obj.score, obj.this_round.score_18, log)
             (obj.score, log) = markertron4000(obj.question_19, obj.this_round.answer_19, obj.score, obj.this_round.score_19, log)
             (obj.score, log) = markertron4000(obj.question_20, obj.this_round.answer_20, obj.score, obj.this_round.score_20, log)
+            (obj.score, log) = markertron4000(obj.question_21, obj.this_round.answer_11, obj.score, obj.this_round.score_21, log)
+            (obj.score, log) = markertron4000(obj.question_22, obj.this_round.answer_12, obj.score, obj.this_round.score_22, log)
+            (obj.score, log) = markertron4000(obj.question_23, obj.this_round.answer_13, obj.score, obj.this_round.score_23, log)
+            (obj.score, log) = markertron4000(obj.question_24, obj.this_round.answer_14, obj.score, obj.this_round.score_24, log)
+            (obj.score, log) = markertron4000(obj.question_25, obj.this_round.answer_15, obj.score, obj.this_round.score_25, log)
             obj.log = log
             obj.save()
             if obj.this_team.team_email:

@@ -43,7 +43,17 @@ class Round(models.Model):
     answer_19 = models.CharField(max_length=500, blank=True)
     score_19 = models.FloatField(default=0.0)
     answer_20 = models.CharField(max_length=500, blank=True)
-    score_20 = models.FloatField(default=0.0)                                                         
+    score_20 = models.FloatField(default=0.0)
+    answer_21 = models.CharField(max_length=500, blank=True)
+    score_21 = models.FloatField(default=0.0)
+    answer_22 = models.CharField(max_length=500, blank=True)
+    score_22 = models.FloatField(default=0.0) 
+    answer_23 = models.CharField(max_length=500, blank=True)
+    score_23 = models.FloatField(default=0.0)
+    answer_24 = models.CharField(max_length=500, blank=True)
+    score_24 = models.FloatField(default=0.0)
+    answer_25 = models.CharField(max_length=500, blank=True)
+    score_25 = models.FloatField(default=0.0)                                                         
     def __str__(self):
         return self.round_name
     class Meta:
@@ -86,6 +96,11 @@ class Result(models.Model):
     question_18 = models.CharField(max_length=500, blank=True)
     question_19 = models.CharField(max_length=500, blank=True)
     question_20 = models.CharField(max_length=500, blank=True)
+    question_21 = models.CharField(max_length=500, blank=True)
+    question_22 = models.CharField(max_length=500, blank=True)
+    question_23 = models.CharField(max_length=500, blank=True)
+    question_24 = models.CharField(max_length=500, blank=True)
+    question_25 = models.CharField(max_length=500, blank=True)
     log = models.TextField(max_length=2000, blank=True)            
     def __str__(self):
         return str(self.submitted) + ' ' + str(self.this_round) + ' ' + str(self.this_team)
